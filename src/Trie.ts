@@ -29,10 +29,11 @@ export class Trie {
     for (let ch of word) {
       if (curr !== null) {
         curr.putChildIfAbsent(ch);
-        // Set the new current node
+        // Set the new current TrieNode
+        // for the next iteration
         curr = curr.getChild(ch);
 
-        // Increase the counter each go-round
+        // Increase the counter each iteration
         // if we've reached the length of the word
         // set the isEnd boolean to true
         if (curr !== null && level++ === word.length - 1) {
@@ -40,7 +41,6 @@ export class Trie {
         }
       }
     }
-
   }
 
   public find(word: string): boolean {
@@ -55,6 +55,17 @@ export class Trie {
 
   public startsWith(prefix: string): boolean {
     return this.getNode(prefix) ? true : false;
+  }
+
+  public delete(word: string): void {
+    if (!this.find(word)) {
+      return;
+    }
+
+    let curr: TrieNode | null = this.root;
+    for (let ch of word) {
+      let child = curr.getChild(ch);
+    }
   }
 
   private getNode(word: string): TrieNode | null {

@@ -39,4 +39,17 @@ Deno.test({
   }
 });
 
+Deno.test({
+  name: 'Deletes a word from the Trie',
+  fn(): void {
+    const trie = new Trie();
+    trie.insert('Mozambique');
+    trie.insert('Mozilla');
+    trie.insert('Trie');
+    assertEquals(true, trie.find('Mozambique'));
+    trie.delete('Mozambique');
+    assertEquals(false, trie.find('Mozambique'));
+  }
+});
+
 await Deno.runTests;
