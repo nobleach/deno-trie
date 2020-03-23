@@ -59,10 +59,15 @@ export class Trie {
 
   private getNode(word: string): TrieNode | null {
     let curr: TrieNode | null = this.root;
+    // Start at root and traverse down
+    // letter by letter
     for (let ch of word) {
       if (curr !== null) {
+        // set curr to next letter in word
         curr = curr.getChild(ch);
       } else {
+        // If we hit a null pointer,
+        // return null
         return null;
       }
     }
