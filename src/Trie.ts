@@ -62,9 +62,22 @@ export class Trie {
       return;
     }
 
+    let level = 0;
+
     let curr: TrieNode | null = this.root;
     for (let ch of word) {
-      let child = curr.getChild(ch);
+      if (curr !== null) {
+        // Set the new current TrieNode
+        // for the next iteration
+        curr = curr.getChild(ch);
+
+        // Increase the counter each iteration
+        // if we've reached the length of the word
+        // set the isEnd boolean to false
+        if (curr !== null && level++ === word.length - 1) {
+          curr.isEnd = false;
+        }
+      }
     }
   }
 
